@@ -1,16 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import SingleBook from './SingleBook'
 import { Col, Container, Form, Row } from 'react-bootstrap'
 import CommentArea from './CommentArea'
 
-class BookList extends React.Component {
-
+const BookList =(props)=> {
+    /*
     state = {
         searchQuery: '',
         selectedBook: null
     }
+    */
+    const [state, setState] = useState({
+        searchQuery: '',
+        selectedBook: null
+    })
 
-    render() {
         return (
             <Container>
                 <Row>
@@ -22,20 +26,20 @@ class BookList extends React.Component {
                                     <Form.Control
                                         type="text"
                                         placeholder="Search here"
-                                        value={this.state.searchQuery}
-                                        onChange={e => this.setState({ searchQuery: e.target.value })}
+                                        value={props.state.searchQuery}
+                                        onChange={e => setState({ searchQuery: e.target.value })}
                                     />
                                 </Form.Group>
                             </Col>
                         </Row>
                         <Row>
                             {
-                                this.props.books.filter(b => b.title.toLowerCase().includes(this.state.searchQuery)).map(b => (
+                                props.books.filter(b => b.title.toLowerCase().includes(state.searchQuery)).map(b => (
                                     <Col xs={3} key={b.asin} >
                                         <SingleBook
                                             book={b}
-                                            selectedBook={this.state.selectedBook}
-                                            changeSelectedBook={asin => this.setState({
+                                            selectedBook={props.state.selectedBook}
+                                            changeSelectedBook={asin => useState({
                                                 selectedBook: asin
                                             })} />
                                     </Col>
@@ -44,12 +48,12 @@ class BookList extends React.Component {
                         </Row>
                     </Col>
                     <Col md={4}>
-                        <CommentArea asin={this.state.selectedBook} />
+                        <CommentArea asin={props.state.selectedBook} />
                     </Col>
                 </Row>
             </Container>
         )
-    }
+    
 
 }
 
