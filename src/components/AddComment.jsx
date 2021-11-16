@@ -68,7 +68,7 @@ const AddComment =(props)=> {
                         <Form.Control
                             type="text"
                             placeholder="Add comment here"
-                            value={this.state.comment.comment}
+                            value={setComment.comment}
                             onChange={e => setComment({
                                 ...comment,
                                 comment: e.target.value
@@ -78,10 +78,10 @@ const AddComment =(props)=> {
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Rating</Form.Label>
-                        <Form.Control as="select" value={this.state.comment.rate}
-                            onChange={e => this.setState({
+                        <Form.Control as="select" value={setComment({rate})}
+                            onChange={e => setComment({
                                 comment: {
-                                    ...this.state.comment,
+                                    ...comment,
                                     rate: e.target.value
                                 }
                             })}>
