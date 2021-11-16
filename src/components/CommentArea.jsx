@@ -12,17 +12,18 @@ const CommentArea = ()=> {
         isError: false
     }
     */
-    const [state, setState] = useState({
-        comments: [], // comments will go here
-        isLoading: false,
-        isError: false
-    })
-
-
-    useEffect((prevProps, props)=>
+    const [comments, setComments] = useState([]) // comments will go here
+    // isLoading: false,
+    //isError: false
+    const [isLoading, setLoading] = useState(false)
+    const[isError, setError] = useState(false)
+    
+    
+    
+    useEffect( async(prevProps)=>
     {
          {
-             setState({
+             useState({
                 isLoading: true
             })
             try {
@@ -34,14 +35,14 @@ const CommentArea = ()=> {
                 console.log(response)
                 if (response.ok) {
                     let comments = await response.json()
-                    setState({ comments: comments, isLoading: false, isError: false })
+                    useState({ comments: comments, isLoading: false, isError: false })
                 } else {
                     console.log('error')
-                    setState({ isLoading: false, isError: true })
+                    useState({ isLoading: false, isError: true })
                 }
             } catch (error) {
                 console.log(error)
-                setState({ isLoading: false, isError: true })
+                useState({ isLoading: false, isError: true })
             }
         }
     }
@@ -50,8 +51,8 @@ const CommentArea = ()=> {
 
         return (
             <div>
-                {props.isLoading && <Loading />}
-                {state.isError && <Error />}
+                {props.setLoading && <Loading />}
+                {state.setError && <Error />}
                 <AddComment asin={props.asin} />
                 <CommentList commentsToShow={state.comments} />
             </div>
